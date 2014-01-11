@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>{
+    UIBackgroundTaskIdentifier backgroundTask;
+    UILocalNotification *localNotification;
+    NSTimer *timer;
+    BOOL isNeedCleanNotification;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 
