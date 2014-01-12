@@ -10,9 +10,11 @@
 #import "AVFoundation/AVFoundation.h"
 
 @implementation AppDelegate
+@synthesize interval = _interval;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    _interval=30;
     isNeedCleanNotification=FALSE;
     NSError *err = nil;
     [[AVAudioSession sharedInstance]setCategory: AVAudioSessionCategoryPlayback error: &err];
@@ -41,7 +43,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         //timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(showCustomTimeWithNotification:) userInfo:nil repeats:YES];
-        timer=[NSTimer timerWithTimeInterval:30 target:self selector:@selector(showCustomTimeWithNotification:) userInfo:Nil repeats:YES];
+        timer=[NSTimer timerWithTimeInterval:_interval target:self selector:@selector(showCustomTimeWithNotification:) userInfo:Nil repeats:YES];
         [timer fire];
         [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
         
