@@ -7,12 +7,16 @@
 //
 
 #import "AppDelegate.h"
+#import "AVFoundation/AVFoundation.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     isNeedCleanNotification=FALSE;
+    NSError *err = nil;
+    [[AVAudioSession sharedInstance]setCategory: AVAudioSessionCategoryPlayback error: &err];
+    [[AVAudioSession sharedInstance]setActive: YES error: &err];
     // Override point for customization after application launch.
     return YES;
 }
@@ -36,7 +40,8 @@
     }];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(showCustomTimeWithNotification:) userInfo:nil repeats:YES];
+        //timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(showCustomTimeWithNotification:) userInfo:nil repeats:YES];
+        timer=[NSTimer timerWithTimeInterval:30 target:self selector:@selector(showCustomTimeWithNotification:) userInfo:Nil repeats:YES];
         [timer fire];
         [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
         
